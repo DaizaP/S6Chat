@@ -4,5 +4,6 @@
     {
         Task<bool> CheckIfExistsAsync(Guid userId);
         Task RegistrateAsync(string name, Guid userId);
+        Task SaveMessage(string content, Guid userId);
     }
 }

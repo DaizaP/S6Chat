@@ -18,9 +18,14 @@ namespace Chat.BLL.Services
             _userRepository = userRepository;
         }
 
-        public Task<bool> CheckIfExistsAsync(Guid userId)
+        public async Task<bool> CheckIfExistsAsync(Guid userId)
         {
-            throw new NotImplementedException();
+            var user = await _userRepository.GetByIdAsync(userId);
+
+            if (user is null)
+                return false;
+
+            return true;
         }
 
         public async Task RegistrateAsync(string name, Guid userId)
@@ -30,6 +35,20 @@ namespace Chat.BLL.Services
                 Id = userId,
                 Name = name,
             };
+            await _userRepository.CreateAsync(user);
+        }
+
+        public async Task SaveMessage(string content, Guid userId)
+        {
+            var user = await _userRepository.GetByIdAsync(userId);
+            var message = new Message
+            {
+                Id = Guid.NewGuid(),
+                User = user,
+                Content = content
+            };
+
+            await _userRepository.SaveMessageToUser(message);
         }
     }
 }

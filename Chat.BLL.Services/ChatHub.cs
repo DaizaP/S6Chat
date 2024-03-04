@@ -38,11 +38,21 @@ namespace Chat.BLL.Services
             Guid userId = new Guid(userIdString);
 
             if (!await _userService.CheckIfExistsAsync(userId))
+            {
+                await Clients.Caller.SendAsync($"User {userName} with id: {userId} not found");
                 throw new Exception("User not found");
+            }
+
+            await Clients.All.SendAsync($"User {userName} was connected");
         }
 
         public async Task Send(string message)
         {
+            var userIdString = Context.GetHttpContext().Request.Query["userId"].ToString();
+            Guid userId = new Guid(userIdString);
+
+            await _userService.SaveMessage(message, userId);
+
             await Clients.All.SendAsync(message);
         }
     }
