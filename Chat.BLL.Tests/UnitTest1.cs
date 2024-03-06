@@ -1,9 +1,7 @@
 using Chat.BLL.Services;
-using Chat.BLL.Services.Contracts;
 using Chat.Common.Entities;
 using Chat.DAL.Repositories.Contracts;
 using Moq;
-using System.Reflection.Metadata;
 
 namespace Chat.BLL.Tests
 {
@@ -27,7 +25,7 @@ namespace Chat.BLL.Tests
             var result = await userService.CheckIfExistsAsync(new Guid("3cd3b98a-65e5-4b29-868a-730c97439f58"));
 
             // Assert
-            Assert.Equal(true, result);
+            Assert.True(result);
         }
     }
 }
