@@ -12,10 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Chat.BLL.Services\Chat.BLL.Services.csproj" />
     <ProjectReference Include="..\Chat.DAL.Repositories.Contracts\Chat.DAL.Repositories.Contracts.csproj" />
     <ProjectReference Include="..\Chat.DAL.Repositories\Chat.DAL.Repositories.csproj" />
